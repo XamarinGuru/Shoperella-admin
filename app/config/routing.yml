@@ -1,0 +1,11 @@
+dashboard_api:
+  type: rest
+  resource: AppBundle\Controller\DashboardApiController
+
+dashboard:
+  resource: AppBundle\Controller\DashboardController
+
+api:
+  type: rest
+  resource: "@AppBundle/Resources/config/routing.yml"
+  prefix: /api

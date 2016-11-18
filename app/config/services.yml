@@ -1,0 +1,39 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+  token_authenticator:
+    class: AppBundle\Security\TokenAuthenticator
+    arguments: ["@doctrine.orm.entity_manager"]
+  user_provider:
+    class: AppBundle\Security\User\UserProvider
+    arguments: ["@doctrine.orm.entity_manager"]
+  detailed_exceptions:
+    class: Monolog\Processor\IntrospectionProcessor
+    tags:
+      - { name: monolog.processor }
+  security.access.deal_voter:
+    class: AppBundle\Security\DealVoter
+    arguments: ["@doctrine.orm.entity_manager"]
+    public: false
+    tags:
+       - { name: security.voter }
+  security.access.offer_voter:
+    class: AppBundle\Security\OfferVoter
+    arguments: ["@doctrine.orm.entity_manager"]
+    public: false
+    tags:
+       - { name: security.voter }
+  security.access.category_activation_voter:
+    class: AppBundle\Security\CategoryActivationVoter
+    arguments: ["@doctrine.orm.entity_manager"]
+    public: false
+    tags:
+       - { name: security.voter }
+  s3_storage:
+    class: AppBundle\Storage\S3Storage
+  push_notifications:
+    class: AppBundle\Notifications\PushNotification
+    arguments: ["@rms_push_notifications"]

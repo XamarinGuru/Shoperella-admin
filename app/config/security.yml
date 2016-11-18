@@ -1,0 +1,42 @@
+security:
+  providers:
+    user:
+      id: user_provider
+    in_memory:
+      memory:
+        users:
+          admin:
+            password: $2y$12$Zi4esIB2eyNuS14uPK9bd.SXjDqcMxEcMoSMY6YkVNWkEH73FCsGm
+            roles: 'ROLE_ADMIN'
+          test:
+            password: $2a$12$5i02298MD7rEuD/M/ys5RueWkWqgxCNcPIdkWYZiBQLCT8Tn8K7Ay
+            roles: 'ROLE_ADMIN'
+            #password is password
+  encoders:
+      Symfony\Component\Security\Core\User\User:
+          algorithm: bcrypt
+          cost: 12
+  firewalls:
+    # disables authentication for assets and the profiler
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    admin:
+      pattern: ^/dashboard
+      provider: in_memory
+      http_basic: ~
+    api:
+      provider: user
+      pattern: ^/api
+      guard:
+        authenticators:
+          - token_authenticator
+      stateless: true
+      anonymous: true
+  access_control:
+    - { path: ^/api/ping, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/auth/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/vendors, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/api/wish, roles: IS_AUTHENTICATED_ANONYMOUSLY }

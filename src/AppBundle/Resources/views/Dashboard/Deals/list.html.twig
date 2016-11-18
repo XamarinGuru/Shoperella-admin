@@ -1,0 +1,28 @@
+{% extends "AppBundle:Dashboard:base.html.twig" %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Daily Deals
+            <a href="{{ path("vendor_add") }}" class="btn pull-right btn-danger">+ Add</a>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for deal in deals %}
+                    <tr>
+                        <td>{{ vendor.name }}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

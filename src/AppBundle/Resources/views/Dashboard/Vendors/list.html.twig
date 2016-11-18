@@ -1,0 +1,33 @@
+{% extends "AppBundle:Dashboard:base.html.twig" %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Vendors
+            <a href="{{ path("vendor_add") }}" class="btn pull-right btn-danger">+ Add</a>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Lat / Long</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vendor in vendors %}
+                        <tr>
+                            <td>{{ vendor.name }}</td>
+                            <td>
+                                {{ vendor.address }}<br />
+                                {{ vendor.city }}, {{ vendor.state }} {{ vendor.zip }}
+                            </td>
+                            <td>{{ vendor.latitude }}, {{ vendor.longitude }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

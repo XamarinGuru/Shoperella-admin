@@ -1,0 +1,37 @@
+ping:
+  type: rest
+  resource: AppBundle\Controller\PingController
+auth:
+  type: rest
+  resource: AppBundle\Controller\AuthController
+vendors:
+  type: rest
+  resource: AppBundle\Controller\VendorsController
+wishes:
+  type: rest
+  resource: AppBundle\Controller\WishesController
+deals:
+  type: rest
+  parent: vendors
+  resource: AppBundle\Controller\DealsController
+deals:
+  type: rest
+  resource: AppBundle\Controller\DealsController
+  parent: vendors
+create_offers:
+  type: rest
+  resource: AppBundle\Controller\OffersController
+  parent: vendors
+offers:
+  type: rest
+  resource: AppBundle\Controller\OffersController
+categories:
+  type: rest
+  resource: AppBundle\Controller\CategoriesController
+category_activations:
+  type: rest
+  resource: AppBundle\Controller\CategoryActivationsController
+  parent: vendors
+redeem:
+  type: rest
+  resource: AppBundle\Controller\RedeemController
